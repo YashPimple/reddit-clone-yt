@@ -1,6 +1,7 @@
 
 ## Workflow of the Project 
 
+
 <img width="817" alt="Workflow" src="https://user-images.githubusercontent.com/97302447/222975664-d5189291-a10e-45d7-a1b5-40df572d7617.png">
 
 
