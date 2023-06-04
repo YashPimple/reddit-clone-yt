@@ -24,11 +24,14 @@ jobs:
     - id: package
       run: |
         #!/usr/bin/env bash
-        pack build --path .  --builder paketobuildpacks/builder:base --publish ${REPO}/cnb:sha-${{ steps.vars.outputs.sha_short }}  
+        pack build --path . --builder paketobuildpacks/builder:base --publish docker.io/${{ secrets.DOCKER_HUB_USER }}/cnb:sha-${{ steps.vars.outputs.sha_short }}  
       shell: bash
       env:
         REPO: docker.io/${{ secrets.DOCKER_HUB_USER }}
-
+    - name: Resolve dependency conflicts
+      run: |
+        npm install -g npm@9.6.7
+        npm ci --unsafe-perm --legacy-peer-deps --cache /layers/paketo-buildpacks_npm-install/npm-cache
     - name: Generate deploy manifest from Jinja template
       uses: cuchi/jinja2-action@v1.1.0
       with: 
